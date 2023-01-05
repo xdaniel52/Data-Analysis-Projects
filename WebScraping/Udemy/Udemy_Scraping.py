@@ -7,44 +7,50 @@ from fake_useragent import UserAgent
 
 
 class Course:
-   
-   def  __init__(self, title, rating, raviewsString, hoursString,lecturesString,levelString):
+   '''Container for information about one course'''
+   def  __init__(self, title, rating, raviews_string, hours_string,lectures_string,level_string):
         self.title = title 
         self.rating = rating
-        if len(raviewsString) == 0:
-            self.raviewsCount = 0
+        if len(raviews_string) == 0:
+            self.raviews_count = 0
         else:         
-            self.raviewsCount = raviewsString[1:-1]
+            self.raviews_count = raviews_string[1:-1]
                 
-        splittedHours = hoursString.split(" ")
-        if splittedHours[2] == "hours" or splittedHours[2] == "hour":
-            self.hours = splittedHours[0]
+        splitted_hours = hours_string.split(" ")
+        if splitted_hours[2] == "hours" or splitted_hours[2] == "hour":
+            self.hours = splitted_hours[0]
         else:
-            self.hours = '0,'+str( int(int(splittedHours[0])/3*5))  
-        self.lectures = lecturesString[:lecturesString.find(" ")]            
-        self.level = levelString
+            self.hours = '0,'+str( int(int(splitted_hours[0])/3*5))  
+        self.lectures = lectures_string[:lectures_string.find(" ")]            
+        self.level = level_string
             
 ua = UserAgent()
-courses = []
+
+path_to_driver = r'C:\Users\daniel\Downloads\msedgedriver.exe' 
+#https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+
+courses = []#list of courses
+
 site_num = 1
-site_address =r"https://www.udemy.com/courses/it-and-software/?lang=en&locale=en_US&p={}&persist_locale=&price=price-free&sort=popularity" 
+site_url =r"https://www.udemy.com/courses/it-and-software/?lang=en&locale=en_US&p={}&persist_locale=&price=price-free&sort=popularity" 
+
 
 while True:
     ua = UserAgent()
-    userAgent = ua.random
-    windows_id = userAgent.find("Windows NT")
+    user_agent = ua.random
+    windows_id = user_agent.find("Windows NT")
     if windows_id >0:
-        while float(userAgent[windows_id+11:windows_id+14]) < 7: 
+        while float(user_agent[windows_id+11:windows_id+14]) < 7: 
             userAgent = ua.random
             windows_id = userAgent.find("Windows NT")
-            if windows_id < 0:
+            if windows_id < 0: #checks to eliminate old windows version
                 break
     options = webdriver.ChromeOptions()
     options.add_argument(f'user-agent={userAgent}')
-    driver = webdriver.Chrome(executable_path=r"C:\Users\danie\Downloads\chromedriver.exe",chrome_options=options)
-    driver.get(site_address.format(site_num))   
+    driver = webdriver.Chrome(executable_path=path_to_driver,chrome_options=options)
+    driver.get(site_url.format(site_num))   
     site_num+=1
-    time.sleep(5) # give time to browser to load the page
+    time.sleep(5) # give time to browser to load the page and javascript to work
     
 
     course_ul = driver.find_elements(By.CSS_SELECTOR,".course-list--container--3zXPS")
@@ -57,29 +63,30 @@ while True:
         break;
     for course in course_list:
         
-        secondTitleLen = len(course.find_element(By.TAG_NAME, "h3").find_element(By.TAG_NAME, "a")\
+        second_title_len = len(course.find_element(By.TAG_NAME, "h3").find_element(By.TAG_NAME, "a")\
               .find_element(By.CSS_SELECTOR,".udlite-sr-only").text)
         title = course.find_element(By.TAG_NAME, "h3").find_element(By.TAG_NAME, "a").text
-        title = title[:len(title)-secondTitleLen]
+        title = title[:len(title)-second_title_len]
         try:
             rating = course.find_element(By.CSS_SELECTOR,".udlite-heading-sm.star-rating--rating-number--2o8YM").text        
         except NoSuchElementException:
             rating = ""
         try:
-            raviewsString = course.find_element(By.CSS_SELECTOR,".udlite-text-xs.course-card--reviews-text--1yloi").text       
+            raviews_string = course.find_element(By.CSS_SELECTOR,".udlite-text-xs.course-card--reviews-text--1yloi").text       
         except NoSuchElementException:
-            raviewsString = ""       
+            raviews_string = ""       
             
         course_card_rows = course.find_element \
             (By.CSS_SELECTOR,".udlite-text-xs.course-card--row--29Y0w.course-card--course-meta-info--2jTzN") \
             .find_elements(By.CSS_SELECTOR,".course-card--row--29Y0w")
-        hoursString = course_card_rows[0].text
-        lecturesString = course_card_rows[1].text
-        levelString = course_card_rows[2].text
+        hours_string = course_card_rows[0].text
+        lectures_string = course_card_rows[1].text
+        level_string = course_card_rows[2].text
 
-        courses.append(Course(title, rating, raviewsString, hoursString,lecturesString,levelString))
+        courses.append(Course(title, rating, raviews_string, hours_string,lectures_string,level_string))
     driver.quit()
 
+#creating xml tree from collected information
 root = gfg.Element('ROOT') 
 coursesList = gfg.Element('COURSES') 
 root.append(coursesList)
@@ -97,7 +104,7 @@ for course in courses:
     
     raviewsCountXML = gfg.Element('RAVIEWS_COUNT') 
     courseXML.append(raviewsCountXML)
-    raviewsCountXML.text = course.raviewsCount
+    raviewsCountXML.text = course.raviews_count
     
     levelXML = gfg.Element('LEVEL') 
     courseXML.append(levelXML)
@@ -113,8 +120,8 @@ for course in courses:
     
 
 tree = gfg.ElementTree(root)
-      
+ 
+#save list of courses to file      
 with open ("result_Udemy_Scraping.xml","wb") as file :
     tree.write(file)
-    
     

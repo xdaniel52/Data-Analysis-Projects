@@ -6,27 +6,34 @@ import xml.etree.ElementTree as gfg
 
 
 class Course:
-   
-   def  __init__(self, title, skillsString, rating, raviewsString, level):
+   '''Container for information about one course'''
+   def  __init__(self, title, skills_string, rating, raviews_string, level):
         self.title = title 
-        self.skills = skillsString[(skillsString.find(":")+2):].split(", ")
+        self.skills = skills_string[(skills_string.find(":")+2):].split(", ")
         self.rating = rating
-        if len(raviewsString) == 0:
-            self.raviewsCount = 0
+        if len(raviews_string) == 0:
+            self.raviews_count = 0
         else:         
-            raviewsString = raviewsString[1:raviewsString.find(" ")]
-            if not raviewsString[-1].isnumeric():
+            raviews_string = raviews_string[1:raviews_string.find(" ")]
+            if not raviews_string[-1].isnumeric():
                 tmp_dict = {"k":1000,"m":1000000}
-                self.raviewsCount = str(int(float(raviewsString[:-1].replace(',','.'))*tmp_dict[raviewsString[-1]]))
+                self.raviews_count = str(int(float(raviews_string[:-1].replace(',','.'))*tmp_dict[raviews_string[-1]]))
             else:
-                self.raviewsCount = str(raviewsString)              
+                self.raviews_count = str(raviews_string)              
         self.level = level[:level.find(" ")]
         
 
-path = r'C:\Users\danie\Downloads\msedgedriver.exe' #https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
-driver = webdriver.Edge(executable_path = path)
-courses = []
-driver.get(r"https://www.coursera.org/search?query=free&index=prod_all_launched_products_term_optimization&skills=Python%20Programming")
+path_to_driver = r'C:\Users\daniel\Downloads\msedgedriver.exe' 
+#https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+
+driver = webdriver.Edge(executable_path = path_to_driver)
+
+courses = [] #list of courses
+
+site_url = r"https://www.coursera.org/search?query=free&index=prod_all_launched_products_term_optimization&skills=Python%20Programming"
+
+#open url in browser
+driver.get(site_url)
 time.sleep(5) # give time to browser to load the page
 
 while True:
@@ -62,6 +69,8 @@ while True:
         break
     driver.execute_script("arguments[0].click();", button)
 
+
+#creating xml tree from collected information
 root = gfg.Element('ROOT') 
 coursesList = gfg.Element('COURSES') 
 root.append(coursesList)
@@ -79,7 +88,7 @@ for course in courses:
     
     raviewsCountXML = gfg.Element('RAVIEWS_COUNT') 
     courseXML.append(raviewsCountXML)
-    raviewsCountXML.text = course.raviewsCount
+    raviewsCountXML.text = course.raviews_count
     
     levelXML = gfg.Element('LEVEL') 
     courseXML.append(levelXML)
@@ -94,6 +103,7 @@ for course in courses:
         skillXML.text = skill
 
 tree = gfg.ElementTree(root)
-      
+
+#save list of courses to file 
 with open ("result_Coursera_Scraping.xml","wb") as file :
     tree.write(file)
