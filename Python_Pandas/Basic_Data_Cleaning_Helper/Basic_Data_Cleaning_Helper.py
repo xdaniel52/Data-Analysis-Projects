@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 
 
-
 class Cleaner:
     def Null_Info(df : pd.DataFrame):
         print("Number of nulls in columns:")
@@ -54,7 +53,7 @@ class Cleaner:
                  
         print(result_df)
           
-    def Print_Outliers(df : pd.DataFrame,col_name ,std_threshold = 1.5):
+    def Print_Outliers(df : pd.DataFrame, col_name, std_threshold = 1.5):
         if not df[col_name].dtype.name in ["object","category"]:
             col_mean = round(df[col_name].mean(),2)
             col_std = round(df[col_name].std(),2)
@@ -84,6 +83,22 @@ class Cleaner:
                 df = df[np.abs(df[col] - col_mean)/col_std <= std_threshold] 
                 
        return df
+   
+    def Numeric_Info(df : pd.DataFrame):
+        print('Numeric columns informations:')
+        result_df = pd.DataFrame(columns=("Column","mean","median", "std","max","min"))
+        for col in df.columns:
+            if not df[col].dtype.name in ["object","category"]:
+                mean = round(df[col].mean(),2)
+                median = round(df[col].median(),2)
+                std = round(df[col].std(),2)
+                max_val = round(df[col].max(),2)
+                min_val = round(df[col].min(),2)
+                result_df.loc[len(result_df.index)] =[col,mean,median,std,max_val,min_val]
+                
+        print(result_df)
+                
+
                      
 
 sleepers = pd.read_csv("sleep_time.csv",usecols=("name","genus","vore","sleep_total","awake","brainwt","bodywt"))
@@ -115,8 +130,8 @@ print()
 sleepers = Cleaner.Remove_Outliers(sleepers,["bodywt"])
 sleepers.info()
 
-
-
+print()
+Cleaner.Numeric_Info(sleepers)
 
 
 
