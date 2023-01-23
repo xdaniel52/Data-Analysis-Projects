@@ -58,15 +58,15 @@ INSERT INTO [Discounts](Name, CardTypeID, ServiceTypeID, Fraction) VALUES('Basic
 
 INSERT INTO [Employees]([JobID],[FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
 				 VALUES(1, 'Daniel', 'Kucharski', 'xdaniel@onet.eu', '123456789', '2001-03-23','M', 'Częstochowa','MyStreet',5,25);
-
+ 
 INSERT INTO [Employees]([JobID],[FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
-				 VALUES(2, 'Przemyk', 'Kysiak', 'przemek_krysiak@gym.com', '234567891', '2001-04-21','M', 'Częstochowa','Brett Way',4,14);
+				 VALUES(2, 'Przemyk', 'Kysiak', 'przemek_krysiak@gym.com', '234567891', '1997-04-21','M', 'Częstochowa','Brett Way',4,14);
 INSERT INTO [Employees]([JobID],[FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
-				 VALUES(2, 'Rafał', 'Bajer', 'rafal_bajer@gym.com', '345678912', '2000-09-30','M', 'Częstochowa','Albara Place ',37, null);
+				 VALUES(2, 'Rafał', 'Bajer', 'rafal_bajer@gym.com', '345678912', '1990-09-30','M', 'Częstochowa','Albara Place ',37, null);
 INSERT INTO [Employees]([JobID],[FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
-				 VALUES(2, 'Mateusz', 'Zaręba', 'matesz_zarebak@gym.com', '456789123', '1999-01-09','M', 'Częstochowa','Kurtz Lane',2,63);
+				 VALUES(2, 'Mateusz', 'Zaręba', 'matesz_zarebak@gym.com', '456789123', '1994-01-09','M', 'Częstochowa','Kurtz Lane',2,63);
 INSERT INTO [Employees]([JobID],[FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
-				 VALUES(2, 'Sara', 'Garncarz', 'sara_garncarz@gym.com', '567891234', '2001-05-15','F', 'Częstochowa','Nicole Terrace',46,82);
+				 VALUES(2, 'Sara', 'Garncarz', 'sara_garncarz@gym.com', '567891234', '1989-05-15','F', 'Częstochowa','Nicole Terrace',46,82);
 
 INSERT INTO [Employees]([JobID],[FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
 				 VALUES(3, 'Isabelle', 'Cain', 'isabelle _cain@gym.com', '678912345', '1989-09-01','F', 'Częstochowa','Liberty Way',10,12);
@@ -118,6 +118,161 @@ INSERT INTO [Contracts]([EmployeeID], [DateSigned], [From], [To], [Salary], [Wor
 
 INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
 				 VALUES('Daniel', 'Kucharski', 'xdaniel@onet.eu', '123456789', '2001-03-23','M', 'Częstochowa','MyStreet',5,25);
+
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Ezra', 'Bridges', 'ezra_bridges@random.com', '660953955', '2002-08-04','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Osvaldo', 'Clarke', 'osvaldo_clarke@random.com', '755527030', '1977-02-19','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Adalberto', 'Bass', 'adalberto_bass@random.com', '501338681', '1988-05-23','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Forest', 'Rush', 'forest_rush@random.com', '840185321', '1996-11-23','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Thomas', 'Marshall', 'thomas_marshall@random.com', '378584482', '1992-06-01','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Warner', 'Frederick', 'warner_frederick@random.com', '160989844', '1989-04-13','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Herb', 'Preston', 'herb_preston@random.com', '373686522', '1979-03-16','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Florencio', 'Fleming', 'florencio_fleming@random.com', '984491789', '1999-04-16','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('George', 'Guzman', 'george_guzman@random.com', '931299264', '2003-05-06','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Myles', 'Cervantes', 'myles_cervantes@random.com', '384922528', '1982-05-13','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Tim', 'Wolf', 'tim_wolf@random.com', '340754239', '1997-04-07','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Carlos', 'Donovan', 'carlos_danovan@random.com', '754695878', '1997-04-07','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Modesto', 'Cross', 'modesto_cross@random.com', '143845640', '1977-03-22','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Pierre', 'Dunlap', 'pierre_dunlap@random.com', '936610434', '1971-12-08','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Wally', 'Lopez', 'wally_lopez@random.com', '741273520', '1973-01-18','M', 'Częstochowa','MyStreet',5,25);
+
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Teddy', 'Neal', 'teddy_neal@random.com', '832113397', '1980-07-07','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Carlton', 'Stokes', 'carlton_stokes@random.com', '608178813', '1980-07-09','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Jackson', 'Branch', 'jackson_branch@random.com', '286900341', '1987-03-07','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Buddy', 'Pugh', 'buddy_pugh@random.com', '346383570', '1987-02-12','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Sterling', 'Cox', 'sterling_cox@random.com', '274460364', '2002-07-02','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Tommie', 'Cantu', 'tommie_cantu@random.com', '743279549', '1982-11-30','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Loyd', 'House', 'loyd_house@random.com', '262104836', '1997-02-04','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Gerard', 'Rasmussen', 'gerald_rasmussen@random.com', '507710104', '1970-11-27','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Garret', 'Prince', 'garret_prince@random.com', '635471279', '1972-05-18','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Cyrus', 'Berger', 'cyrus_berger@random.com', '105566672', '1981-04-10','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Dan', 'Bond', 'dan_bond@random.com', '520697711', '1993-02-20','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Joshua', 'Osborn', 'jashua_osborn@random.com', '559875579', '2003-09-16','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Tyler', 'One', 'tyler_one@random.com', '365429950', '1997-05-26','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Claud', 'Blackwell', 'claud_blackwell@random.com', '241608933', '1990-04-26','M', 'Częstochowa','MyStreet',5,25);
+
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Alfonzo', 'Mejia', 'alfonzo_mejia@random.com', '889937894', '1999-12-19','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Elwood', 'Santiago', 'elwood_santiago@random.com', '335335887', '1982-08-13','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Jake', 'Salinas', 'jake_salinas@random.com', '977582284', '1983-09-26','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Buck', 'Nelson', 'buck_nelson@random.com', '436468639', '1977-02-19','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Giuseppe', 'Caldwell', 'giusepper_caldwell@random.com', '597557239', '2002-08-04','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Gale', 'Ortiz', 'gale_ortiz@random.com', '558580094', '2005-04-01','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Ramiro', 'Huff', 'ramiro_huff@random.com', '928583503', '2005-04-01','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Jere', 'Huber', 'jare_huber@random.com', '644545485', '2001-03-13','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Mathew', 'Oneill', 'mathew_oneill@random.com', '189117337', '2002-08-25','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Garret', 'Parsons', 'garrert_parsons@random.com', '793289897', '1996-11-17','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Vincent', 'Krause', 'vincent_krause@random.com', '678453028', '1999-08-20','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Barney', 'Cameron', 'barney_cameron@random.com', '276482038', '1985-06-14','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Marc', 'Peterson', 'marc_peterson@random.com', '719612790', '1999-10-09','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Frederic', 'Arroyo', 'frederic_arroyo@random.com', '795391337', '1997-03-11','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Rufus', 'Morse', 'rufus_morse@random.com', '483611029', '2004-12-23','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Cyrus', 'Wilcox', 'cyrus_wilcox@random.com', '941333924', '1989-06-12','M', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Branden', 'Ochoa', 'branden_ochoa@random.com', '379129372', '1983-02-12','M', 'Częstochowa','MyStreet',5,25);
+
+
+
+
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Rebecca', 'Washington', 'rebecca_washington@random.com', '790351856', '1980-03-25','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Susanna', 'Guerra', 'Susanna_guerra@random.com', '574743464', '1992-10-13','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Patty ', 'Sharp', 'patty_sharp@random.com', '208623272', '1990-05-05','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Helena', 'Whitaker', 'helena_whitaker@random.com', '739534860', '1992-11-10','F', 'Częstochowa','MySreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Juliana', 'Hawkins', 'juliana_hawkins@random.com', '141912652', '1972-05-11','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Rene', 'James', 'rene_james@random.com', '322264429', '1989-06-27','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Tonya', 'Strickland', 'tonya_strickland@random.com', '809176101', '1995-12-02','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Jamie', 'Barker', 'jamie_barker@random.com', '943404561', '1974-10-23','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Alyce', 'Sweeney', 'alyce_sweeney@random.com', '741926860', '2004-09-06','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Kara', 'Booth', 'kara_booth@random.com', '443946061', '1972-03-07','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Elvia', 'Pennington', 'elivia_pannington@random.com', '338339938', '1984-03-21','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Kara', 'Booth', 'kara_booth@random.com', '443946061', '1976-03-21','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Marianne', 'Combs', 'marianne_combs@random.com', '668942041', '1973-09-04','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Isabel', 'Oslon', 'isabel_oslon@random.com', '805292229', '1977-06-02','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Julia', 'Campbell', 'julia_campbell@random.com', '692633901', '1979-08-07','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Elva', 'Griffith', 'elva_griffith@random.com', '225790348', '1997-09-22','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Joanne', 'Mckay', 'joanne_mckay@random.com', '483404466', '1974-11-03','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Marla', 'Vega', 'marla_vega@random.com', '841691621', '1994-12-24','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Frieda', 'Holt', 'frieda_holt@random.com', '971101120', '1977-03-30','F', 'Częstochowa','MyStreet',5,25);
+INSERT INTO [Customers]([FirstName],[LastName],[Email],[PhoneNumber],[DateOfBirth],[Sex],[City],[StreetAddress],[HouseNumber],[ApartmentNumber]) 
+VALUES('Aisha', 'Nielsen', 'aisha_nielsen@random.com', '853720501', '1973-05-23','F', 'Częstochowa','MyStreet',5,25);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
