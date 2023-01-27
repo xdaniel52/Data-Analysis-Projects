@@ -16,8 +16,8 @@ CREATE TABLE [Customers] (
     [DateOfBirth] DATE  NOT NULL ,
     [Sex] CHAR(1)  NOT NULL ,
     [City] VARCHAR(50)  NOT NULL ,
-    [StreetAddress] VARCHAR(30)  NOT NULL ,
-    [HouseNumber] INT  NOT NULL ,
+    [StreetName] VARCHAR(30)  NOT NULL ,
+    [BuildingNumber] INT  NOT NULL ,
     [ApartmentNumber] INT  NULL ,
     CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED (
         [CustomerID] ASC
@@ -98,8 +98,8 @@ CREATE TABLE [Employees] (
     [DateOfBirth] DATE  NOT NULL ,
     [Sex] CHAR(1)  NOT NULL ,
     [City] VARCHAR(50)  NOT NULL ,
-    [StreetAddress] VARCHAR(30)  NOT NULL ,
-    [HouseNumber] INT  NOT NULL ,
+    [StreetName] VARCHAR(30)  NOT NULL ,
+    [BuildingNumber] INT  NOT NULL ,
     [ApartmentNumber] INT  NULL ,
     CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED (
         [EmployeeID] ASC
