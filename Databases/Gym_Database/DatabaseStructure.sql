@@ -1,11 +1,12 @@
--- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
--- Link to schema: https://app.quickdatabasediagrams.com/#/d/6EyytZVARCHAR2
--- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
 SET XACT_ABORT ON
 
-BEGIN TRANSACTION QUICKDBD
+BEGIN TRANSACTION GymTransaction
 
+CREATE DATABASE Gym;
+USE Gym;
+
+--Tables
 CREATE TABLE [Customers] (
     [CustomerID] INT IDENTITY(1,1) NOT NULL ,
     [FirstName] VARCHAR(50)  NOT NULL ,
@@ -44,7 +45,7 @@ CREATE TABLE [CardTypes] (
 CREATE TABLE [PurchasesHistory] (
     [PurchaseID] INT IDENTITY(1,1) NOT NULL ,
     [ServiceID] INT  NOT NULL ,
-    [CardID] INT  NOT NULL ,
+    [CardID] INT  NULL ,
     [EmployeeID] INT  NOT NULL ,
     [PurchaseDate] DATE  NOT NULL ,
     [Price] DECIMAL(5,2)  NOT NULL ,
@@ -137,9 +138,7 @@ CREATE TABLE [Jobs] (
     )
 )
 
-
-
-
+--Constraints
 ALTER TABLE [MembershipCards] WITH CHECK ADD CONSTRAINT [FK_MembershipCards_CustomerID] FOREIGN KEY([CustomerID])
 REFERENCES [Customers] ([CustomerID])
 
@@ -213,8 +212,7 @@ ALTER TABLE [Customers] WITH CHECK ADD CONSTRAINT [CHK_Customers_Sex] CHECK([Sex
 
 ALTER TABLE [Customers] CHECK CONSTRAINT [CHK_Customers_Sex]
 
-
-
+--Indexes
 CREATE INDEX [idx_MembershipCards_CustomerID]
 ON [MembershipCards] ([CustomerID])
 
@@ -236,4 +234,4 @@ ON [MembershipHistory] ([CardID])
 CREATE INDEX [idx_Services_ServiceTypeID]
 ON [Services] ([ServiceTypeID])
 
-COMMIT TRANSACTION QUICKDBD
+COMMIT TRANSACTION GymTransaction
