@@ -7,8 +7,11 @@ __pycache__/
 *.so
 
 #datasets
-Python_Machine_Learning/Feature_selection/cancer.csv
-Python_Machine_Learning/Feature_selection/breast_cancer_analysis.html
+/Python_Machine_Learning/Feature_selection/breast-cancer.csv
+
+#exported results
+/Python_Machine_Learning/Feature_selection/breast_cancer_analysis.html
+
 
 # Distribution / packaging
 .Python
