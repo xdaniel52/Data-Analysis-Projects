@@ -3,17 +3,18 @@ import numpy as np
 
 
 class Cleaner:
-    def Null_Info(df : pd.DataFrame):
+    def null_info(df : pd.DataFrame):
         print("Number of nulls in columns:")
         cols = df.columns
-        result_ds = pd.DataFrame(index=(cols),columns=(["Nulls Count"]))
+        result_ds = pd.DataFrame(index=(cols),columns=(["Nulls_Count","Nulls_percent"]))
         for col in cols:
-            result_ds.loc[col,"Nulls Count"] = int(df[col].isna().sum())          
+            result_ds.loc[col,"Nulls_Count"] = int(df[col].isna().sum())        
+            result_ds.loc[col,"Nulls_percent"] = round(result_ds.loc[col,"Nulls_Count"]/df[col].count(),2) 
         print(result_ds)
         
-    def Category_Helper(df : pd.DataFrame):
+    def category_helper(df : pd.DataFrame):
         cols = df.columns
-        result_df = pd.DataFrame(columns=("Column","Type","Unique Count", "Total Count","Is Category Good"))
+        result_df = pd.DataFrame(columns=("Column","Type","Unique_Count", "Total_Count","Is_Category_Good"))
         
         for col in cols:
             col_type = df[col].dtype
@@ -28,20 +29,20 @@ class Cleaner:
             result_df.loc[len(result_df.index)]=[col,col_type,count_unique,count_total,cat_good]
         return result_df
      
-    def Check_Category_Type(df : pd.DataFrame):
+    def check_category_type(df : pd.DataFrame):
         print("If category type is good for columns:")
-        result_df = Cleaner.Category_Helper(df)             
+        result_df = Cleaner.category_helper(df)             
         print(result_df)
      
-    def ChangeTypesToCategory(df : pd.DataFrame):
-         helper_df = Cleaner.Category_Helper(df)
+    def change_types_to_category(df : pd.DataFrame):
+         helper_df = Cleaner.category_helper(df)
          for col in df.columns:
-             if helper_df[helper_df["Column"] == col]["Is Category Good"].iloc[0]:           
+             if helper_df[helper_df["Column"] == col]["Is_Category_Good"].iloc[0]:           
                  df[col] = df[col].astype("category");        
         
-    def Outliers_Info(df : pd.DataFrame, std_threshold = 1.5):
+    def outliers_info(df : pd.DataFrame, std_threshold = 1.5):
         print("Info about outliers:")
-        result_df = pd.DataFrame(columns=("Column","Type","Mean", "Std","Outliers upper","Outliers lower"))
+        result_df = pd.DataFrame(columns=("Column","Type","Mean", "Std","Outliers_upper","Outliers_lower"))
         for col in df.columns:
              if not df[col].dtype.name in ["object","category"]:
                  col_type = df[col].dtype
@@ -53,7 +54,7 @@ class Cleaner:
                  
         print(result_df)
           
-    def Print_Outliers(df : pd.DataFrame, col_name, std_threshold = 1.5):
+    def print_outliers(df : pd.DataFrame, col_name, std_threshold = 1.5):
         if not df[col_name].dtype.name in ["object","category"]:
             col_mean = round(df[col_name].mean(),2)
             col_std = round(df[col_name].std(),2)
@@ -72,7 +73,7 @@ class Cleaner:
         else:
             raise TypeError("Chosen column is not numeric")
             
-    def Remove_Outliers(df : pd.DataFrame, cols=[],std_threshold = 1.5):
+    def remove_outliers(df : pd.DataFrame, cols=[],std_threshold = 1.5):
        if len(cols) == 0 :
            cols = df.columns
        for col in cols:
@@ -84,7 +85,7 @@ class Cleaner:
                 
        return df
    
-    def Numeric_Info(df : pd.DataFrame):
+    def numeric_info(df : pd.DataFrame):
         print('Numeric columns informations:')
         result_df = pd.DataFrame(columns=("Column","mean","median", "std","max","min"))
         for col in df.columns:
@@ -97,6 +98,44 @@ class Cleaner:
                 result_df.loc[len(result_df.index)] =[col,mean,median,std,max_val,min_val]
                 
         print(result_df)
+
+    def int_sizes_info(df : pd.DataFrame):
+        print('Int columns informations:')
+        result_df = pd.DataFrame(columns=("Column","current_dtype","optimal_dtype","max","min" ))
+        MAX_INT32 = 2**31 - 1
+        MAX_INT16 = 2**15 - 1
+        MAX_INT8 = 2**7 - 1
+        MAX_UINT32 = 2**32 - 1
+        MAX_UINT16 = 2**16 - 1
+        MAX_UINT8 = 2**8 - 1
+
+        for col in df.columns:
+            if df[col].dtype.name in ["int64","int32"]:
+                max_val = df[col].max()
+                min_val = df[col].min()
+                optimal_type = df[col].dtype.name
+                if min_val >= 0:
+                    if max_val <= MAX_UINT8:
+                        optimal_type = "uint8"
+                    elif max_val <= MAX_UINT16:
+                        optimal_type = "uint16"
+                    elif max_val <= MAX_UINT32:
+                        optimal_type = "uint32"
+                    else:
+                        optimal_type = "uint64"
+                else:
+                    if max(max_val,abs(min_val)) <= MAX_INT8:
+                        optimal_type = "int8"
+                    elif max(max_val,abs(min_val)) <= MAX_INT16:
+                        optimal_type = "int16"
+                    elif max(max_val,abs(min_val)) <= MAX_INT32:
+                        optimal_type = "int32"
+                    else:
+                        optimal_type = "int64"
+
+                result_df.loc[len(result_df.index)] = [col,df[col].dtype.name,optimal_type,max_val,min_val]
+                
+        print(result_df)
                 
 
                      
@@ -107,31 +146,31 @@ print()
 sleepers.info()
 
 print()
-Cleaner.Null_Info(sleepers)
+Cleaner.null_info(sleepers)
 
 print()
 sleepers = sleepers.dropna()
 sleepers.info()
 
 print()
-Cleaner.Check_Category_Type(sleepers)
+Cleaner.check_category_type(sleepers)
 
 print()
-Cleaner.ChangeTypesToCategory(sleepers)
+Cleaner.check_category_type(sleepers)
 sleepers.info()
 
 print()
-Cleaner.Outliers_Info(sleepers)
+Cleaner.outliers_info(sleepers)
 
 print()
-Cleaner.Print_Outliers(sleepers,"bodywt")
+Cleaner.print_outliers(sleepers,"bodywt")
 
 print()
-sleepers = Cleaner.Remove_Outliers(sleepers,["bodywt"])
+sleepers = Cleaner.remove_outliers(sleepers,["bodywt"])
 sleepers.info()
 
 print()
-Cleaner.Numeric_Info(sleepers)
+Cleaner.numeric_info(sleepers)
 
-
-
+print()
+Cleaner.int_sizes_info(sleepers)
