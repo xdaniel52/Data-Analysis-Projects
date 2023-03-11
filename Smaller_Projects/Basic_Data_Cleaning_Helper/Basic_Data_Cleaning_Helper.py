@@ -12,7 +12,7 @@ class Cleaner:
             result_ds.loc[col,"Nulls_percent"] = round(result_ds.loc[col,"Nulls_Count"]/df[col].count(),2) 
         print(result_ds)
         
-    def category_helper(df : pd.DataFrame):
+    def __category_helper(df : pd.DataFrame):
         cols = df.columns
         result_df = pd.DataFrame(columns=("Column","Type","Unique_Count", "Total_Count","Is_Category_Good"))
         
@@ -31,11 +31,11 @@ class Cleaner:
      
     def check_category_type(df : pd.DataFrame):
         print("If category type is good for columns:")
-        result_df = Cleaner.category_helper(df)             
+        result_df = Cleaner.__category_helper(df)             
         print(result_df)
      
     def change_types_to_category(df : pd.DataFrame):
-         helper_df = Cleaner.category_helper(df)
+         helper_df = Cleaner.__category_helper(df)
          for col in df.columns:
              if helper_df[helper_df["Column"] == col]["Is_Category_Good"].iloc[0]:           
                  df[col] = df[col].astype("category");        
@@ -44,7 +44,7 @@ class Cleaner:
         print("Info about outliers:")
         result_df = pd.DataFrame(columns=("Column","Type","Mean", "Std","Outliers_upper","Outliers_lower"))
         for col in df.columns:
-             if not df[col].dtype.name in ["object","category"]:
+             if not df[col].dtype.name in ["object","category","bool","datetime64[ns]"]:
                  col_type = df[col].dtype
                  col_mean = df[col].mean()
                  col_std = df[col].std()
@@ -55,7 +55,7 @@ class Cleaner:
         print(result_df)
           
     def print_outliers(df : pd.DataFrame, col_name, std_threshold = 1.5):
-        if not df[col_name].dtype.name in ["object","category"]:
+        if not df[col_name].dtype.name in ["object","category","bool","datetime64[ns]"]:
             col_mean = round(df[col_name].mean(),2)
             col_std = round(df[col_name].std(),2)
             upper = df[(df[col_name] - col_mean)/col_std > std_threshold][col_name]
@@ -77,7 +77,7 @@ class Cleaner:
        if len(cols) == 0 :
            cols = df.columns
        for col in cols:
-            if col in df.columns and not df[col].dtype.name in ["object","category"]:
+            if col in df.columns and not df[col].dtype.name in ["object","category","bool","datetime64[ns]"]:
                 col_mean = df[col].mean()
                 col_std = df[col].std()
                 print(df[np.abs(df[col] - col_mean)/col_std > std_threshold])
@@ -89,7 +89,7 @@ class Cleaner:
         print('Numeric columns informations:')
         result_df = pd.DataFrame(columns=("Column","mean","median", "std","max","min"))
         for col in df.columns:
-            if not df[col].dtype.name in ["object","category"]:
+            if not df[col].dtype.name in ["object","category","bool","datetime64[ns]"]:
                 mean = round(df[col].mean(),2)
                 median = round(df[col].median(),2)
                 std = round(df[col].std(),2)
@@ -138,39 +138,39 @@ class Cleaner:
         print(result_df)
                 
 
-                     
+if __name__ == "__main__":                    
 
-sleepers = pd.read_csv("sleep_time.csv",usecols=("name","genus","vore","sleep_total","awake","brainwt","bodywt"))
-print(sleepers.head())
-print()
-sleepers.info()
+    sleepers = pd.read_csv("sleep_time.csv",usecols=("name","genus","vore","sleep_total","awake","brainwt","bodywt"))
+    print(sleepers.head())
+    print()
+    sleepers.info()
 
-print()
-Cleaner.null_info(sleepers)
+    print()
+    Cleaner.null_info(sleepers)
 
-print()
-sleepers = sleepers.dropna()
-sleepers.info()
+    print()
+    sleepers = sleepers.dropna()
+    sleepers.info()
 
-print()
-Cleaner.check_category_type(sleepers)
+    print()
+    Cleaner.check_category_type(sleepers)
 
-print()
-Cleaner.check_category_type(sleepers)
-sleepers.info()
+    print()
+    Cleaner.check_category_type(sleepers)
+    sleepers.info()
 
-print()
-Cleaner.outliers_info(sleepers)
+    print()
+    Cleaner.outliers_info(sleepers)
 
-print()
-Cleaner.print_outliers(sleepers,"bodywt")
+    print()
+    Cleaner.print_outliers(sleepers,"bodywt")
 
-print()
-sleepers = Cleaner.remove_outliers(sleepers,["bodywt"])
-sleepers.info()
+    print()
+    sleepers = Cleaner.remove_outliers(sleepers,["bodywt"])
+    sleepers.info()
 
-print()
-Cleaner.numeric_info(sleepers)
+    print()
+    Cleaner.numeric_info(sleepers)
 
-print()
-Cleaner.int_sizes_info(sleepers)
+    print()
+    Cleaner.int_sizes_info(sleepers)
