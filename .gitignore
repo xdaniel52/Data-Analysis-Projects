@@ -9,6 +9,8 @@ __pycache__/
 
 #datasets
 *.csv
+*.parquet
+*.pickle
 
 
 
