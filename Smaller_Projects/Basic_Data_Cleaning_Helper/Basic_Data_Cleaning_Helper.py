@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-class Cleaner:
+class DataCleaner:
     def null_info(df : pd.DataFrame):
         print("Number of nulls in columns:")
         cols = df.columns
