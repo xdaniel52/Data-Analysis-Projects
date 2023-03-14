@@ -31,11 +31,11 @@ class DataCleaner:
      
     def check_category_type(df : pd.DataFrame):
         print("If category type is good for columns:")
-        result_df = Cleaner.__category_helper(df)             
+        result_df = DataCleaner.__category_helper(df)             
         print(result_df)
      
     def change_types_to_category(df : pd.DataFrame):
-         helper_df = Cleaner.__category_helper(df)
+         helper_df = DataCleaner.__category_helper(df)
          for col in df.columns:
              if helper_df[helper_df["Column"] == col]["Is_Category_Good"].iloc[0]:           
                  df[col] = df[col].astype("category");        
@@ -146,31 +146,31 @@ if __name__ == "__main__":
     sleepers.info()
 
     print()
-    Cleaner.null_info(sleepers)
+    DataCleaner.null_info(sleepers)
 
     print()
     sleepers = sleepers.dropna()
     sleepers.info()
 
     print()
-    Cleaner.check_category_type(sleepers)
+    DataCleaner.check_category_type(sleepers)
 
     print()
-    Cleaner.check_category_type(sleepers)
+    DataCleaner.check_category_type(sleepers)
     sleepers.info()
 
     print()
-    Cleaner.outliers_info(sleepers)
+    DataCleaner.outliers_info(sleepers)
 
     print()
-    Cleaner.print_outliers(sleepers,"bodywt")
+    DataCleaner.print_outliers(sleepers,"bodywt")
 
     print()
-    sleepers = Cleaner.remove_outliers(sleepers,["bodywt"])
+    sleepers = DataCleaner.remove_outliers(sleepers,["bodywt"])
     sleepers.info()
 
     print()
-    Cleaner.numeric_info(sleepers)
+    DataCleaner.numeric_info(sleepers)
 
     print()
-    Cleaner.int_sizes_info(sleepers)
+    DataCleaner.int_sizes_info(sleepers)
