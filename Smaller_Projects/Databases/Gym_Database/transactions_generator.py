@@ -4,7 +4,12 @@ from datetime import date, timedelta
 from random import random, randint
 
 
-connection = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER=DANIEL-WIN;DATABASE=Gym;Trusted_Connection=yes;')
+SERVER_NAME = "YOUR-SERVER-NAME" #DANIEL-WIN
+DATABASE_NAME = "Gym"
+START_DATE = date(2020,1,2) #declare start date of all transactions
+RESULT_FILE_NAME = "result.sql"
+
+connection = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER='+SERVER_NAME+';DATABASE='+DATABASE_NAME+';Trusted_Connection=yes;')
 
 sqlDiscountsQuery = """SELECT  [ServiceID],
                         [Discounts].CardTypeID,
@@ -22,16 +27,17 @@ sqlDiscountsQuery = """SELECT  [ServiceID],
 Discounts = pd.read_sql(sqlDiscountsQuery,connection)
 Customers = pd.DataFrame(columns=['Index','CardTypeID','PurchaseDate'])
 Purchases = pd.DataFrame(columns=['ServiceID','CardID','CustomerID','EmployeeID','PurchaseDate','Price','To'])
-n_customers = 70
+
 n_services = Discounts['ServiceID'].nunique()
 print(f'n_services: {n_services}')
 
 
-current_date = date(2020,1,2) #declare start date
+current_date = START_DATE
+N_CUSTOMERS = 70
 current_CardTypeID = 3
 
 # generate purchases for membership cards
-for customer_idx in range(1,n_customers+1):
+for customer_idx in range(1,N_CUSTOMERS+1):
     if customer_idx < 5:
         # generete cards for employees
         Customers.loc[customer_idx] = [customer_idx,3,current_date]
@@ -42,13 +48,13 @@ for customer_idx in range(1,n_customers+1):
             current_date+= timedelta(days=randint(0,10))
 
             if customer_idx == 40:
-                current_date = date(2021,1,2) 
+                current_date = START_DATE.replace(year=START_DATE.year + 1)
 
         elif customer_idx <= 60:
             current_date+=timedelta(days=randint(0,15))
 
             if customer_idx == 60:
-                current_date = date(2022,1,2)
+                current_date = START_DATE.replace(year=START_DATE.year + 2)
 
         else:
             current_date+=timedelta(days=randint(0,20))
@@ -71,12 +77,12 @@ for customer_idx in range(1,n_customers+1):
 services_groups = [[1,2,3,4,5,6],[9,10,11,12],[1,2,7,13],[13,14,15,7],[1,2,3,4,9,10,11,12]] # define 5 type of customers and their most liked services
 
 # generate purchases every customer with ID = 1..70
-for customer_idx in range(1,n_customers+1):
+for customer_idx in range(1,N_CUSTOMERS+1):
     customer_date = Customers.loc[customer_idx,'PurchaseDate']+timedelta(days=randint(1,3))
     service_idx = 0 
     customer_cardtype = Customers.loc[customer_idx,'CardTypeID']
     customer_type = randint(0,4)
-    while customer_date < date(2023,1,1):
+    while customer_date < START_DATE.replace(year=START_DATE.year + 3):
         if random() < 0.95: # check if customer will automatically buy new service or take a break
             
             if random()<0.1: # check if customer will buy random service or one of the most liked services
@@ -113,7 +119,7 @@ for customer_idx in range(1,n_customers+1):
 
 # sort all purchases by date and write them to file
 Purchases = Purchases.sort_values(by='PurchaseDate',ascending=True)
-file = open("result.txt", "w")
+file = open(RESULT_FILE_NAME, "w")
 for row in Purchases.iterrows():
     row = row[1]
     file.write(f"EXEC addPurchase @ServiceID={row['ServiceID']},@EmployeeID={row['EmployeeID']},@Date='{row['PurchaseDate']}',@Price={row['Price']},@CardID={row['CardID']},@CustomerID={row['CustomerID']},@From='{row['PurchaseDate']}',@To='{row['To']}';\n")
@@ -121,4 +127,4 @@ for row in Purchases.iterrows():
 file.close()
 
 # print number of purchases generated
-print(f"generated purchases: len(Purchases)")
+print(f"generated purchases: {len(Purchases)}")
