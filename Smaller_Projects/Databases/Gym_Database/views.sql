@@ -1,3 +1,6 @@
+use Gym;
+
+GO
 
 CREATE OR ALTER VIEW vw_ServicesList AS
 --clear view of all services without cards
@@ -8,10 +11,11 @@ SELECT [ServiceID]
 	  ,CASE WHEN [ServiceTypes].DurationInHours = 1 THEN 'hours' ELSE 'days' END AS TimeUnit
       ,[OnlyMorning]
       ,[Price]
-  FROM [Gym].[dbo].[Services]
-  JOIN [Gym].[dbo].[ServiceTypes] ON ([Services].[ServiceTypeID] = [ServiceTypes].[ServiceTypeID])
+  FROM [dbo].[Services]
+  JOIN [dbo].[ServiceTypes] ON ([Services].[ServiceTypeID] = [ServiceTypes].[ServiceTypeID])
   WHERE [Services].[ServiceTypeID] != 5;
 
+GO
 
 CREATE OR ALTER VIEW vw_CardsWithDiscountsList AS
 --clear view of discounts to each card type
@@ -27,20 +31,20 @@ SELECT
 	SELECT dis.[CardTypeID] AS CardTypeID
       ,dis.[ServiceTypeID] AS ServiceTypeID
       ,dis.[Fraction] AS Fraction
-  FROM [Gym].[dbo].[Discounts] dis
+  FROM [dbo].[Discounts] dis
   ) DiscountsQuery  
   JOIN 
   (
 	SELECT ser.[Duration] AS CardTypeID
       ,ser.[Price] AS Price
       ,ser.[Name] AS Name
-  FROM [Gym].[dbo].[Services] ser
+  FROM [dbo].[Services] ser
   WHERE ser.[ServiceTypeID] = 5
   ) ServicesQuery
   ON (DiscountsQuery.[CardTypeID] = ServicesQuery.[CardTypeID])
   GROUP BY DiscountsQuery.CardTypeID,ServicesQuery.Name,ServicesQuery.Price;
 
-
+GO
 
 
 CREATE OR ALTER VIEW vw_CurrentEmployees AS
@@ -55,8 +59,8 @@ SELECT [Employees].[EmployeeID]
 	  ,[LatestContracts].[From]
 	  ,CASE WHEN [LatestContracts].[To] = '9999-12-31' THEN '' ELSE  CONVERT(varchar ,[LatestContracts].[To]) END AS "To"
 	  ,DATEDIFF(year, [OldestContracts].[From], CONVERT(date, GETDATE())) AS Qualifying_Period_In_Years
-  FROM [Gym].[dbo].[Employees]
-  JOIN [Gym].[dbo].[Jobs] ON ([Employees].[JobID] = [Jobs].[JobID])
+  FROM [dbo].[Employees]
+  JOIN [dbo].[Jobs] ON ([Employees].[JobID] = [Jobs].[JobID])
   JOIN (
 	  SELECT [ContractID]
 		  ,[EmployeeID]
@@ -65,7 +69,7 @@ SELECT [Employees].[EmployeeID]
 		  ,[To]
 		  ,[Salary]
 		  ,[WorkingTime]
-	  FROM [Gym].[dbo].[Contracts] LatestContractsInner
+	  FROM [dbo].[Contracts] LatestContractsInner
 	  WHERE [From] = (
 			SELECT max([From]) 
 			FROM [Gym].[dbo].[Contracts] WhereContracts
@@ -76,49 +80,51 @@ SELECT [Employees].[EmployeeID]
 		
 		SELECT EmployeeID
 			,Min([From]) AS [From]
-		FROM [Gym].[dbo].[Contracts] WhereContracts
+		FROM [dbo].[Contracts] WhereContracts
 		GROUP BY EmployeeID
 			
-	) OldestContracts ON ([Employees].[EmployeeID] = OldestContracts.[EmployeeID])
-  ;
+	) OldestContracts ON ([Employees].[EmployeeID] = OldestContracts.[EmployeeID]);
 
+GO
 
 CREATE OR ALTER VIEW vw_GymIncomsIn2022byServiceType AS
 --incoms in 2022 groped by ServiceType
-SELECT [ServiceTypes].[Name] AS "ServiceType"
+SELECT TOP 1000 [ServiceTypes].[Name] AS "ServiceType"
       ,FORMAT(SUM([PurchasesHistory].[Price]), 'C') AS "Income"
-  FROM [Gym].[dbo].[PurchasesHistory] 
+  FROM [dbo].[PurchasesHistory] 
   JOIN [Services] ON ([PurchasesHistory].[ServiceID] = [Services].[ServiceID])
   JOIN [ServiceTypes] ON ([Services].[ServiceTypeID] = [ServiceTypes].[ServiceTypeID])
   WHERE Year([PurchaseDate]) = 2022
   GROUP BY [ServiceTypes].[Name]
-  ORDER BY SUM([PurchasesHistory].[Price]) DESC;
+  ORDER BY SUM([PurchasesHistory].[Price]) DESC
+  ;
 
+GO
 
 CREATE OR ALTER VIEW vw_GymIncomsIn2022byCardType AS
 --incoms in 2022 groped by CardType
-SELECT [CardTypes].[Name] AS "CardType"
+SELECT TOP 1000 [CardTypes].[Name] AS "CardType"
       ,FORMAT(SUM([PurchasesHistory].[Price]), 'C') AS "Income in 2022"
-  FROM [Gym].[dbo].[PurchasesHistory] 
+  FROM .[dbo].[PurchasesHistory] 
   JOIN [MembershipCards] ON ([PurchasesHistory].[CardID] = [MembershipCards].[CardID])
   JOIN [CardTypes] ON ([MembershipCards].[CardTypeID] = [CardTypes].[CardTypeID])
   WHERE Year([PurchasesHistory].[PurchaseDate]) = 2022
   GROUP BY [CardTypes].[Name]
   ORDER BY SUM([PurchasesHistory].[Price]) DESC;
 
+GO
 
 CREATE OR ALTER VIEW vw_GymIncomsIn2022byEmployee AS
 --incoms in 2022 groped by receptionist
-SELECT [Employees].[EmployeeID]
+SELECT TOP 1000 [Employees].[EmployeeID]
 	  ,[Employees].[FirstName] 
 	  ,[Employees].[LastName] 
       ,FORMAT(SUM([PurchasesHistory].[Price]), 'C') AS "Income in 2022"
-  FROM [Gym].[dbo].[PurchasesHistory] 
+  FROM [dbo].[PurchasesHistory] 
   JOIN [Employees] ON ([PurchasesHistory].[EmployeeID] = [Employees].[EmployeeID])
   WHERE Year([PurchasesHistory].[PurchaseDate]) = 2022
   GROUP BY [Employees].[EmployeeID],[Employees].[FirstName],[Employees].[LastName]
   ORDER BY SUM([PurchasesHistory].[Price]) DESC;
-
 
 
 

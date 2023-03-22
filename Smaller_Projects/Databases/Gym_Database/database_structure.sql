@@ -1,10 +1,11 @@
 
 SET XACT_ABORT ON
 
-BEGIN TRANSACTION GymTransaction
-
 CREATE DATABASE Gym;
-USE Gym;
+
+use Gym;
+
+BEGIN TRANSACTION GymTransaction
 
 --Tables
 CREATE TABLE [Customers] (
