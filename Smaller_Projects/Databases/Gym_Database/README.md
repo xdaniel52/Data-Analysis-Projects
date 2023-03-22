@@ -6,3 +6,8 @@
 - Views - contains sets of views
 - DatabaseData and DatabaseDataPurchases - contain mock data, enabling to see something in views
 - transactions_generator.py - script used to generate all purchases 
+
+
+## Database diagram:
+
+![Database_diagram.png](Database_diagram.png)
